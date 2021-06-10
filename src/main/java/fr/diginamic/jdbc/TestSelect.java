@@ -1,5 +1,6 @@
 package fr.diginamic.jdbc;
 
+import fr.diginamic.jdbc.entites.Fournisseur;
 import org.mariadb.jdbc.Driver;
 
 import java.sql.*;
