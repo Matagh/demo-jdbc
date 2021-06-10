@@ -5,23 +5,24 @@ import org.mariadb.jdbc.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class TestConnexionJdbc {
+public class TestInsertion {
     public static void main(String[] args) throws SQLException {
-
-
         // 1- Load mariaDb Driver
         DriverManager.registerDriver(new Driver());
 
         // 2- Connect to the database 'compta'
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/compta", "root", "");
 
-        if(connection!=null){
-            System.out.println("Connection succeed");
-            System.out.println(connection.toString());
+        Statement state = connection.createStatement();
+        int res = state.executeUpdate("INSERT INTO fournisseur (NOM) values ('La Maison de la Peinture');");
+
+        if (res!=0){
+            System.out.println("Insertion succeed !");
         }
 
-        // 3- Close the connection
+        state.close(); // Indispensable pour certaines BDD. Exemple : Oracle
         connection.close(); // Indispensable pour certaines BDD. Exemple : Oracle
     }
 }
